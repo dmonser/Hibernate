@@ -1,4 +1,4 @@
-package ru.netology.Hibernate;
+package ru.netology.Hibernate.entities;
 
 
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Builder
 @AllArgsConstructor
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "persons", schema = "hibernate")
+@IdClass(PersonId.class)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +29,21 @@ public class Person {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false)
+    @Column()
     private int age;
 
     @Column
     private String phone_number;
 
-    @Column
+    @Column(nullable = false)
     private String city_of_living;
+}
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+class PersonId implements Serializable {
+    private long id;
+    private String name;
+    private String surname;
 }
