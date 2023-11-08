@@ -1,6 +1,7 @@
 package ru.netology.Hibernate.repository;
 
 import org.springframework.core.io.ClassPathResource;
+import ru.netology.Hibernate.entities.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,24 +18,9 @@ public class Repository {
     @PersistenceContext
     EntityManager entityManager;
 
-    private final String scriptFileName = "search_by_city.sql";
-
-    private final String sql = read(scriptFileName);
-
-    private static String read(String scriptFileName) {
-        try (InputStream is = new ClassPathResource(scriptFileName).getInputStream();
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
-            return bufferedReader.lines().collect(Collectors.joining("\n"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<String> getPersonsByCity(String city) {
-        List<String> result = entityManager.createQuery(sql)
-                .setParameter(1, city)
+    public List<Person> getPersonsByCity(String city) {
+        return (List<Person>) entityManager.createNativeQuery("select name, surname from hibernate.persons where lower(city_of_living) = lower(:city)")
+                .setParameter("city", city)
                 .getResultList();
-
-        return result;
     }
 }

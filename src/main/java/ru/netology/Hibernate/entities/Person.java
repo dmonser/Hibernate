@@ -13,8 +13,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-@Table(name = "persons", schema = "hibernate")
+@Entity(name = "persons")
+@Table(schema = "hibernate")
 @IdClass(PersonId.class)
 public class Person {
     @Id
