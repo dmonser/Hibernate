@@ -13,7 +13,7 @@ public class Repository {
     private EntityManager entityManager;
 
     public List<Person> getPersonsByCity(String city) {
-        return (List<Person>) entityManager.createNativeQuery("select name, surname from hibernate.persons where lower(city_of_living) = lower(:city)")
+        return entityManager.createQuery("from Person where lower(city_of_living) = lower(:city)", Person.class)
                 .setParameter("city", city)
                 .getResultList();
     }

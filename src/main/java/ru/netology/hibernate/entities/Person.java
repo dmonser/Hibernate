@@ -12,8 +12,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@Entity(name = "persons")
-@Table(schema = "hibernate")
+@Entity
+@Table(schema = "hibernate", name = "persons")
 @IdClass(PersonId.class)
 public class Person {
     @Id
@@ -30,7 +30,7 @@ public class Person {
 
     @Column
     @ToString.Exclude
-    private int age;
+    private Integer age;
 
     @Column(name = "phone_number")
     @ToString.Exclude
