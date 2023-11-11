@@ -1,10 +1,7 @@
-package ru.netology.Hibernate.entities;
+package ru.netology.hibernate.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +9,9 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity(name = "persons")
 @Table(schema = "hibernate")
 @IdClass(PersonId.class)
@@ -29,14 +28,16 @@ public class Person {
     @Column(nullable = false)
     private String surname;
 
-    @Column()
+    @Column
+    @ToString.Exclude
     private int age;
 
-    @Column
-    private String phone_number;
+    @Column(name = "phone_number")
+    @ToString.Exclude
+    private String phoneNumber;
 
-    @Column(nullable = false)
-    private String city_of_living;
+    @Column(nullable = false, name = "city_of_living")
+    private String cityOfLiving;
 }
 
 @AllArgsConstructor

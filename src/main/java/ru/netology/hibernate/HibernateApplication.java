@@ -1,12 +1,8 @@
-package ru.netology.Hibernate;
+package ru.netology.hibernate;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @SpringBootApplication
 public class HibernateApplication {
